@@ -1,6 +1,9 @@
 blocked-command-message:
   - "Unknown command. Type \"/help\" for help."
 
+# Should the server notify admins about violations?
+send-notifications: false
+
 # Message that will receive those who has "abps.notify" permission
 blocked-command-message-admin:
   - "&8[&cAntiPluginSteal&8] &fThe player &c{player} &ftried to execute a blocked command. (&c/{command}&f)"

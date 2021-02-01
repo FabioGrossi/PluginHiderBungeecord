@@ -38,15 +38,17 @@ public final class PlayerChatListener implements Listener
         if (player.hasPermission("phb.bypass." + command)) {
             return;
         }
-        if (this.plugin.equalsIgnoreCase(this.plugin.getBlockedCommands(), command)) {
+        if (plugin.equalsIgnoreCase(plugin.getBlockedCommands(), command)) {
             event.setCancelled(true);
-            for (final String message : this.plugin.getBlockedCommandMessage()) {
-                player.sendMessage(this.plugin.transformString(message.replace("{command}", command)));
+            for (final String message : plugin.getBlockedCommandMessage()) {
+                player.sendMessage(plugin.transformString(message.replace("{command}", command)));
             }
-            for (final ProxiedPlayer online : ProxyServer.getInstance().getPlayers()) {
-                if (online.hasPermission("phb.notify")) {
-                    for (final String message2 : this.plugin.getBlockedCommandMessageAdmin()) {
-                        online.sendMessage(this.plugin.transformString(message2.replace("{player}", player.getName()).replace("{command}", command)));
+            if (plugin.isSendNotification()){
+                for (final ProxiedPlayer online : ProxyServer.getInstance().getPlayers()) {
+                    if (online.hasPermission("phb.notify")) {
+                        for (final String message2 : plugin.getBlockedCommandMessageAdmin()) {
+                            online.sendMessage(plugin.transformString(message2.replace("{player}", player.getName()).replace("{command}", command)));
+                        }
                     }
                 }
             }

@@ -25,6 +25,7 @@ public class Main extends Plugin {
     private List<String> blockedCommandMessage;
     private List<String> blockedCommandMessageAdmin;
     private List<String> blockedCommands;
+    private boolean sendNotification;
 
     @Override
     public void onLoad() {
@@ -53,6 +54,7 @@ public class Main extends Plugin {
         blockedCommandMessage = (List<String>)config.getStringList("blocked-command-message");
         blockedCommandMessageAdmin = (List<String>)config.getStringList("blocked-command-message-admin");
         blockedCommands = (List<String>)config.getStringList("blocked-commands");
+        sendNotification = config.getBoolean("send-notifications");
     }
 
     @Override
@@ -105,5 +107,13 @@ public class Main extends Plugin {
             }
         }
         return false;
+    }
+
+    public boolean isSendNotification() {
+        return sendNotification;
+    }
+
+    public void setSendNotification(boolean sendNotification) {
+        this.sendNotification = sendNotification;
     }
 }

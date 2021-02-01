@@ -28,7 +28,7 @@ public class PlayerTabCompleteListener implements Listener {
         command = command.substring(1);
         if (player.hasPermission("phb.bypass." + command))
             return;
-        if (this.plugin.equalsIgnoreCase(this.plugin.getBlockedCommands(), command))
+        if (plugin.equalsIgnoreCase(plugin.getBlockedCommands(), command))
             event.setCancelled(true);
     }
 }
