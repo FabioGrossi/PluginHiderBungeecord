@@ -1,5 +1,5 @@
-name: AntiPluginSteal
-main: com._FabioTNT.pixelgames.abps.Main
-version: 1.0.0
+name: PluginHider
+main: com._FabioTNT.pluginhiderbungeecord.Main
+version: 1.0.1
 author: _FabioTNT
 description: The very first BungeeCord plugin that blocks accessing plugins via commands
