@@ -1,5 +1,5 @@
 name: PluginHider
 main: com._FabioTNT.pluginhiderbungeecord.Main
-version: 1.0.1
-author: _FabioTNT
+version: 1.0.2
+authors: [_FabioTNT, Zio_Pagnotta]
 description: The very first BungeeCord plugin that blocks accessing plugins via commands
