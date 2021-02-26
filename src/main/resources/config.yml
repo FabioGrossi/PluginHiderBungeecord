@@ -6,7 +6,7 @@ send-notifications: false
 
 # Message that will receive those who has "abps.notify" permission
 blocked-command-message-admin:
-  - "&8[&cAntiPluginSteal&8] &fThe player &c{player} &ftried to execute a blocked command. (&c/{command}&f)"
+  - "&8[&cPHB&8] &c{player} &ftried to execute a blocked command. (&c/{command}&f)"
 
 # Blocked commands; You can add infinite amount of commands
 blocked-commands:
