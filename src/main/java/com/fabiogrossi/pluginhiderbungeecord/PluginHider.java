@@ -1,7 +1,7 @@
-package com._FabioTNT.pluginhiderbungeecord;
+package com.fabiogrossi.pluginhiderbungeecord;
 
-import com._FabioTNT.pluginhiderbungeecord.listeners.PlayerChatListener;
-import com._FabioTNT.pluginhiderbungeecord.listeners.PlayerTabCompleteListener;
+import com.fabiogrossi.pluginhiderbungeecord.listeners.PlayerChatListener;
+import com.fabiogrossi.pluginhiderbungeecord.listeners.PlayerTabCompleteListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -20,16 +20,19 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
-public class PluginMain extends Plugin {
-    private static PluginMain instance;
+public class PluginHider extends Plugin {
+
     private Configuration config;
     private List<String> messages;
     private List<String> messagesAdmins;
     private List<String> commands;
     private boolean sendNotification;
 
-    public static PluginMain getInstance() {
-        return instance;
+    public static void setLowerCase(List<String> list) {
+        ListIterator<String> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            iterator.set(iterator.next().toLowerCase());
+        }
     }
 
     public boolean isSendNotification() {
@@ -55,9 +58,7 @@ public class PluginMain extends Plugin {
         File configFile = new File(getDataFolder(), "config.yml");
 
         //config exists then load values
-        if(configFile.exists()) {
-            instance = this;
-
+        if (configFile.exists()) {
             try {
                 config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
             } catch (IOException exception) {
@@ -81,8 +82,8 @@ public class PluginMain extends Plugin {
         }
 
         //try to create a new one from default internally stored
-        try(InputStream inputStream = getResourceAsStream("config.yml")) {
-            if(inputStream == null) {
+        try (InputStream inputStream = getResourceAsStream("config.yml")) {
+            if (inputStream == null) {
                 log("Internal config was not found, this error is critical. Contact the developer");
                 return;
             }
@@ -100,14 +101,14 @@ public class PluginMain extends Plugin {
 
         PluginManager pluginManager = getProxy().getPluginManager();
 
-        pluginManager.registerListener(this, new PlayerChatListener());
-        pluginManager.registerListener(this, new PlayerTabCompleteListener());
+        pluginManager.registerListener(this, new PlayerChatListener(this));
+        pluginManager.registerListener(this, new PlayerTabCompleteListener(this));
     }
 
     public BaseComponent[] colorize(String string) {
         if (string == null || string.isEmpty()) {
             log("Cannot apply color to null or empty string");
-            return null;
+            return new BaseComponent[]{};
         }
 
         return TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', string));
@@ -115,12 +116,5 @@ public class PluginMain extends Plugin {
 
     public void log(String error) {
         getLogger().log(Level.SEVERE, error);
-    }
-
-    public static void setLowerCase(List<String> list) {
-        ListIterator<String> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            iterator.set(iterator.next().toLowerCase());
-        }
     }
 }

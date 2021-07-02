@@ -1,12 +1,19 @@
-package com._FabioTNT.pluginhiderbungeecord.listeners;
+package com.fabiogrossi.pluginhiderbungeecord.listeners;
 
-import com._FabioTNT.pluginhiderbungeecord.PluginMain;
+import com.fabiogrossi.pluginhiderbungeecord.PluginHider;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.TabCompleteEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
 public class PlayerTabCompleteListener implements Listener {
+
+    private final PluginHider pluginHider;
+
+    public PlayerTabCompleteListener(PluginHider pluginHider) {
+        this.pluginHider = pluginHider;
+    }
+
     @EventHandler(priority = 127)
     public void onPlayerTab(TabCompleteEvent event) {
         if (event.isCancelled() || !(event.getSender() instanceof ProxiedPlayer)) {
@@ -26,9 +33,8 @@ public class PlayerTabCompleteListener implements Listener {
         }
 
         command = command.substring(1);
-        PluginMain instance = PluginMain.getInstance();
 
-        if(instance.getCommands().contains(command.toLowerCase()) && !player.hasPermission("phb.bypass." + command)) {
+        if (pluginHider.getCommands().contains(command.toLowerCase()) && !player.hasPermission("phb.bypass." + command)) {
             event.setCancelled(true);
         }
     }

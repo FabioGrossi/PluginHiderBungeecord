@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com._FabioTNT</groupId>
-  <artifactId>pluginhiderbungeecord</artifactId>
+  <artifactId>PluginHiderBungeecord</artifactId>
   <name>PluginHiderBungeecord</name>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-RELEASE</version>
 
   <repositories>
     <repository>
